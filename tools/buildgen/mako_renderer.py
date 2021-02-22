@@ -109,7 +109,7 @@ def main(argv):
             with open(arg, 'r') as dict_file:
                 bunch.merge_json(
                     json_dict,
-                    yaml.load(dict_file.read(), Loader=yaml.FullLoader))
+                    yaml.load(dict_file.read(), Loader=yaml.SafeLoader))
         elif opt == '-p':
             plugins.append(import_plugin(arg))
         elif opt == '-w':
@@ -132,7 +132,7 @@ def main(argv):
     for arg in args:
         got_input = True
         with open(arg) as f:
-            srcs = list(yaml.load_all(f.read(), Loader=yaml.FullLoader))
+            srcs = list(yaml.load_all(f.read(), Loader=yaml.SafeLoader))
         for src in srcs:
             if isinstance(src, str):
                 assert len(srcs) == 1
